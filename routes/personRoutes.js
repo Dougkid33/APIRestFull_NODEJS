@@ -1,9 +1,11 @@
 const router = require('express').Router()
 const Person = require('../models/Person')
+const cors = require('cors');
 
-
+router.use(cors());
 //crete
 router.post('/', async(req,res)=> {
+    
     const{name,salary,approved} = req.body
 
     if(!name){
@@ -24,7 +26,7 @@ router.post('/', async(req,res)=> {
 })
 
 //Read - ler dados buscar todos
-router.get('/', async (req, res)=>{
+router.get('/getpeople', async (req, res)=>{
     try {
         const people = await Person.find()
         res.status(200).json(people)
